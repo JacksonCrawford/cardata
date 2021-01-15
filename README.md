@@ -29,7 +29,7 @@ then,
 The library and package names are included in the list below in the parentheses, and they are case-sensitive!
 
 - [Python](https://www.python.org)
-  - [BeatifulSoup4](https://beautiful-soup-4.readthedocs.io/en/latest/) (BeautifulSoup4)
+  - [BeatifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/) (BeautifulSoup4)
   - [lxml](https://lxml.de/) (lxml)
   - [requests](https://requests.readthedocs.io/en/master/) (requests)
 - [Julia](https://www.julialang.org)
