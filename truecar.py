@@ -1,14 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
-
-file = open("truecar.csv", "w")
+from config import CarConfig
 
 def scraper():
-    site = requests.get("https://www.truecar.com/used-cars-for-sale/listings/porsche/911/location-charlotte-nc/")
+    # Opens the CSV file for data storage
+    # Uses w+ mode; will create the csv file if it doesn't exist
+    file = open("truecar.csv", "w+")
+    # Instantiates a Config object
+    config = CarConfig()
+    # Creates a GET request to the trueCar link in the config
+    site = requests.get(config.getTrueCarLink())
     soup = BeautifulSoup(site.text, "lxml")
     creamySoup = soup.find(class_="row row-2 margin-bottom-3")
-
+    # Finds all of the car info cards on the website
     cards = creamySoup.find_all(class_="card-content vehicle-card-body")
+    # Loops through all of the info cards to gather data
     for card in cards:
         year = card.find(class_="vehicle-card-year font-size-1").contents[0]
         model = card.find(class_="vehicle-header-make-model text-truncate")
@@ -47,9 +53,9 @@ def scraper():
         data = year + " " + model + ", " + price + ", " + trim + ", " + miles + ", " + location + ", " + color
         file.write(data)
         file.write("\n")
+    # Closes the CSV file after adding scraped data
+    file.close()
 
-
-
-
-scraper()
-file.close()
+# Main Method
+if __name__ == "__main__":
+    scraper()
