@@ -1,4 +1,5 @@
 using Plots
+theme(:juno)
 
 function getData()
     open("truecar.csv") do f
@@ -75,9 +76,8 @@ function plotData()
     locPlot = scatter(years, locations, title="Location of Porsche 911's (TrueCar)",
         xlabel="Year", ylabel="Mileage", legend=false)
 
-    plot(pricePlot, milePlot, locPlot, layout=grid(3,1), legend=false)
-#    plot(pricePlot, milePlot, locPlot, layout=grid(3,1, heights=[10, 10, 10],),legend=false)
-
+    # Plotting everything
+    plot(pricePlot, milePlot, locPlot, layout=grid(3,1), size=(650,800), legend=false)
 end
 
 function main()
