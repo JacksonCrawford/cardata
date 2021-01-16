@@ -1,15 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 from config import CarConfig
+import linker
 
-def scraper():
+def scraper(url):
     # Opens the CSV file for data storage
     # Uses w+ mode; will create the csv file if it doesn't exist
-    file = open("truecar.csv", "w+")
+    file = open("truecar.csv", "a")
     # Instantiates a Config object
     config = CarConfig()
     # Creates a GET request to the trueCar link in the config
-    site = requests.get(config.getTrueCarLink())
+    site = requests.get(url)
     soup = BeautifulSoup(site.text, "lxml")
     creamySoup = soup.find(class_="row row-2 margin-bottom-3")
     # Finds all of the car info cards on the website
@@ -58,4 +59,7 @@ def scraper():
 
 # Main Method
 if __name__ == "__main__":
-    scraper()
+    with open("truecar.csv", "w") as f:
+        f.close()
+    for link in linker.truecar("toyota", "camry", "charlotte", "nc"):
+        scraper(link)
