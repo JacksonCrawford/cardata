@@ -4,9 +4,8 @@ theme(:juno)
 line = 0
 
 function getData()
-    open("truecar.csv") do f
+    open("master.csv") do f
         data = ""
-
         while !eof(f)
             data = string(readline(f), ", ", data)
             global line += 1
