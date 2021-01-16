@@ -1,13 +1,15 @@
 using Plots
 theme(:juno)
 
+line = 0
+
 function getData()
     open("truecar.csv") do f
         data = ""
-        line = 0
+
         while !eof(f)
             data = string(readline(f), ", ", data)
-            line += 1
+            global line += 1
         end
         return data
     end
@@ -15,6 +17,8 @@ end
 
 function plotData()
     data = getData()
+    elements = line * 6
+
     years = []
     prices = []
     mileage = []
@@ -22,14 +26,15 @@ function plotData()
     cars = split(data, ", ")
 
     # Creating an array of year/model
-    for a in 1:6:102
+    for a in 1:6:elements
         year = cars[a]
         push!(years, parse(Int64, year[1:4]))
     end
 
     # Creating an array of prices
-    for b in 2:6:102
-        price = replace(cars[b], "," =>"")
+    for b in 2:6:elements
+        #price = replace(cars[b], "," =>"")
+        price = cars[b]
         if price != "No Price"
             price = parse(Int64, price[2:end])
         else
@@ -39,8 +44,9 @@ function plotData()
     end
 
     # Creating an array of mileage
-    for d in 4:6:102
-        miles = replace(cars[d], "," =>"")
+    for d in 4:6:elements
+        miles = cars[d]
+        #miles = replace(cars[d], "," =>"")
         if miles != "Not Listed"
             miles = replace(miles, " miles" =>"")
             miles = parse(Int64, miles)
@@ -50,7 +56,7 @@ function plotData()
         push!(mileage, miles)
     end
 
-    for e in 5:6:102
+    for e in 5:6:elements
         location = cars[e]
         locationDex = findfirst(" mi", location)
         if location != "Not Listed"
@@ -74,7 +80,7 @@ function plotData()
 
     # Plotting Location
     locPlot = scatter(years, locations, title="Location of Porsche 911's (TrueCar)",
-        xlabel="Year", ylabel="Mileage", legend=false)
+        xlabel="Year", ylabel="Miles from zip", legend=false)
 
     # Plotting everything
     plot(pricePlot, milePlot, locPlot, layout=grid(3,1), size=(650,800), legend=false)
@@ -83,5 +89,6 @@ end
 function main()
     plotData()
 end
+
 
 main()
