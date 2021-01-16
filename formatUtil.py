@@ -13,7 +13,7 @@ def createLocationString(distance, city):
     # @param distance - an integer of the distance to the car (in miles, ex. 48.93)
     # @param city - a string of the city where the car is located (ex. "Charlotte")
     if distance and city:
-        return str(round(distance)) + " mi - " + city
+        return str(round(distance)).replace(",", "") + " mi - " + city
     else:
         return "Not Listed"
 

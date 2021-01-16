@@ -54,7 +54,7 @@ def scraper():
                     # Grabs the trim
                     trim = listing["trimName"] or "Not Listed"
                     # Grabs the mileage
-                    miles = (listing["mileageString"] + " miles") or "Not Listed"
+                    miles = (listing["mileageString"] + " miles").replace(",", "") or "Not Listed"
                     # Grabs the location, have to append a couple entries to make this the same format as truecar
                     location = formatUtil.createLocationString(listing["distance"], listing["sellerCity"].split(", ")[0])
                     # Grabs the color. Unfortunately CarGurus does not provide interior color.

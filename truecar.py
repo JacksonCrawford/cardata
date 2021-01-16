@@ -30,7 +30,7 @@ def scraper():
         try:
             miles = str(card.find(class_="d-flex w-100 justify-content-between").contents[0])
             miles = miles[miles.find("</svg>") + 6:miles.find("</div>"):]
-            miles = miles.replace("<!-- -->", "")
+            miles = miles.replace("<!-- -->", "").replace(",", "")
         except AttributeError:
             miles = "Not Listed"
         try:
