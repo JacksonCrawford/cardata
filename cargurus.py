@@ -50,7 +50,7 @@ def scraper():
                     # Creates a Year Make Model string
                     ymm = formatUtil.createYMMString(year, make, model)
                     # Grabs the price
-                    price = listing["expectedPriceString"] or "No Price"
+                    price = listing["expectedPriceString"].replace(",", "") or "No Price"
                     # Grabs the trim
                     trim = listing["trimName"] or "Not Listed"
                     # Grabs the mileage

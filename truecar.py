@@ -20,7 +20,7 @@ def scraper():
         model = card.find(class_="vehicle-header-make-model text-truncate")
         model = model.contents[0] + " " + model.contents[4]
         try:
-            price = (card.find(class_="heading-3 margin-y-1 font-weight-bold")).contents[0]
+            price = (card.find(class_="heading-3 margin-y-1 font-weight-bold")).contents[0].replace(",", "")
         except AttributeError:
             price = "No Price"
         try:
