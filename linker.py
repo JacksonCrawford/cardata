@@ -38,7 +38,7 @@ def cargurus(make, model, city, state):
     # Opens the cargurus homepage with the driver
     driver.get('https://www.cargurus.com/')
     # Gets a random ZIP code with city and state because CarGurus only accepts ZIP for location
-    zipCode = getZip(city, state) 
+    zipCode = getZip(city, state)
     # Creates a dictionary with the arguments needed in JS
     argDict = {'make': make, 'model': model, 'zip': zipCode}
     # Opens the JavaScript file to grab the text
@@ -63,3 +63,20 @@ def cargurus(make, model, city, state):
         linkList.append(url + "#resultsPage=" + str(num))
     # Finally returns the list
     return linkList
+
+def edmunds(make, model, city, state):
+    page = 1
+    link = "https://www.edmunds.com/inventory/srp.html?inventorytype=used%2Ccpo&make=" + make + "&model=" + model + "&pagenumber="
+    linkList = [link + str(page)]
+    driver = webdriver.Firefox()
+    driver.get(link + str(page))
+    soup = BeautifulSoup(driver.page_source, "lxml")
+    burgerSoup = soup.find(class_="text-nowrap medium text-gray-darker")
+    while not (burgerSoup.contents[6] >= burgerSoup.contents[10]):
+        page += 1
+        url = link + str(page)
+        driver.get(url)
+        soup = BeautifulSoup(driver.page_source, "lxml")
+        burgerSoup = soup.find(class_="text-nowrap medium text-gray-darker")
+        linkList.append(url)
+    driver.close()
