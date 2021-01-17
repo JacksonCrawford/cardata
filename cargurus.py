@@ -45,24 +45,11 @@ def scraper(fileName):
                         # print(json.dumps(listing, sort_keys=True, indent=4))
                         # Grabs the year
                         year = listing["carYear"]
-                        # Grabs the make
-                        #make = listing["makeName"]
-                        # Grabs the model
-                        #model = listing["modelName"]
-                        # Creates a Year Make Model string
-                        #ymm = formatUtil.createYMMString(year, make, model)
                         # Grabs the price
                         price = listing["expectedPriceString"].replace(",", "").replace("$", "") or "No Price"
-                        # Grabs the trim
-                        # trim = listing["trimName"] or "Not Listed"
                         # Grabs the mileage
                         miles = (listing["mileageString"] + " miles").replace(",", "").replace(" miles", "") or "Not Listed"
-                        # Grabs the location, have to append a couple entries to make this the same format as truecar
-                        #location = formatUtil.createLocationString(listing["distance"], listing["sellerCity"].split(", ")[0])
-                        # Grabs the color. Unfortunately CarGurus does not provide interior color.
-                        #color = formatUtil.createColorString(listing["normalizedExteriorColor"], "Unknown")
                         # Puts the data into CSV format
-                        #csvString = (ymm + ", " + price + ", " + trim + ", " + miles + ", " + location + ", " + color)
                         csvString = (str(year) + "," + price + "," + miles)
                         # Finally writes the CSV data to the file
                         # print(csvString)
