@@ -14,8 +14,8 @@ class CarConfig:
         # Opens the config file or creates it if it doesn't exist
         self.config = configparser.ConfigParser()
         if not os.path.exists('config.ini'):
-            self.config['Scrape Links'] = {'carGurus': '', 'autoTrader': '',
-                                           'carsDotCom': '', 'trueCar': '', 'edmunds': '', 'carsDirect': ''}
+            self.config['Search Criteria'] = {'make': '', 'model': '',
+                                           'city': '', 'stateCode': ''}
             with open('config.ini', 'w+') as configfile:
                 self.config.write(configfile)
             print("Please fill out the config file and restart the application!")
@@ -23,33 +23,24 @@ class CarConfig:
         # Reads the config file for their values
         self.config.read('config.ini')
         # Stores read values into instance variables
-        self._carGurusLink = self.config['Scrape Links']['carGurus']
-        self._autoTraderLink = self.config['Scrape Links']['autoTrader']
-        self._carsDotComLink = self.config['Scrape Links']['carsDotCom']
-        self._trueCarLink = self.config['Scrape Links']['trueCar']
-        self._edmundsLink = self.config['Scrape Links']['edmunds']
-        self._carsDirectLink = self.config['Scrape Links']['carsDirect']
+        self._make = self.config['Search Criteria']['make']
+        self._model = self.config['Search Criteria']['model']
+        self._city = self.config['Search Criteria']['city']
+        self._state = self.config['Search Criteria']['stateCode']
 
-    def getCarGurusLink(self):
+    def getMake(self):
         # Get method for the link to Car Gurus
-        return self._carGurusLink
+        return self._make
 
-    def getAutoTraderLink(self):
+    def getModel(self):
         # Get method for the link to AutoTrader
-        return self._autoTraderLink
+        return self._model
 
-    def getCarsDotComLink(self):
+    def getCity(self):
         # Get method for the link to cars.com
-        return self._carsDotComLink
+        return self._city
 
-    def getTrueCarLink(self):
+    def getState(self):
         # Get method for the link to TrueCar
-        return self._trueCarLink
+        return self._state
 
-    def getEdmundsLink(self):
-        # Get method for the link to Edmunds
-        return self._edmundsLink
-
-    def getCarsDirectLink(self):
-        # Get method for the link to Cars Direct
-        return self._carsDirectLink
