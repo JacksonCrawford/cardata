@@ -38,6 +38,7 @@ def scraper(fileName):
             file.write("\n")
     # Closes the CSV file after adding scraped data
     file.close()
+    print("Done Scraping TrueCar!")
 
 # Main Method
 if __name__ == "__main__":

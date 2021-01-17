@@ -40,6 +40,7 @@ def scraper(fileName):
             file.write(data)
             file.write("\n")
     file.close()
+    print ("Done Scraping Edmunds!")
 
 
 if __name__ == "__main__":

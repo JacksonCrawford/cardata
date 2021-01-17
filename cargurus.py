@@ -67,6 +67,7 @@ def scraper(fileName):
                         file.write(csvString + "\n")
     # Closes the csv file
     file.close()
+    print("Done Scraping CarGurus!")
 
 
 if __name__ == '__main__':
