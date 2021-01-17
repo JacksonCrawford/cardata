@@ -12,7 +12,7 @@ def edmunds():
     soup = BeautifulSoup(getSource("https://www.edmunds.com/inventory/srp.html?inventorytype=used%2Ccpo&make=porsche&model=911"), "lxml")
     edmundSoup = soup.find("usurp-card-list list-unstyled align-items-stretch row")
 
-    outfile = open("edmunds.csv", "w+")
+    outfile = open("output/edmunds.csv", "a")
     cards = soup.find_all(class_="d-flex mb-0_75 mb-md-1_5 col-12 col-md-6")
     for card in cards:
         year = str(card.find(class_="card-title size-16 text-primary-darker font-weight-bold d-block mb-0_5").contents[0])
@@ -34,4 +34,10 @@ def edmunds():
         outfile.write("\n")
     outfile.close()
 
-edmunds()
+
+if __name__ == "__main__":
+    # Wipes the CSV file
+    with open("output/edmunds.csv", "w") as f:
+        f.close()
+    # Runs the scraper
+    edmunds()
