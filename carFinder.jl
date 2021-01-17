@@ -1,3 +1,5 @@
+using DataFrames, GLM
+using Statistics
 using Plots
 theme(:juno)
 
@@ -18,9 +20,9 @@ function plotData()
     data = getData()
     elements = line * 3
 
-    years = []
-    prices = []
-    mileage = []
+    years = Int64[]
+    prices = Int64[]
+    mileage = Int64[]
     cars = split(data, ",")
 
     # Creating an array of year/model
@@ -51,18 +53,32 @@ function plotData()
         push!(mileage, miles)
     end
 
-    gr()
+    priceData = DataFrame(X=prices, Y=years)
+    olsPrice = lm(@formula(X ~ Y), priceData)
+    linearFitP = predict(olsPrice)
+
+    mileData = DataFrame(X=mileage, Y=years)
+    olsMiles = lm(@formula(X ~ Y), mileData)
+    linearFitM = predict(olsMiles)
+
+
+    plotlyjs()
 
     # Plotting Prices
-    pricePlot = scatter(years, prices, title="Price of Porsche 911's (TrueCar)",
+    pricePlot = scatter(years, prices, title="Price of Porsche 911's",
         xlabel="Year", ylabel="Price", legend=false)
+    plot!(years, linearFitP)
 
     # Plotting Mileage
-    milePlot = scatter(years, mileage, title="Mileage of Porsche 911's (TrueCar)",
+    milePlot = scatter(years, mileage, title="Mileage of Porsche 911's",
         xlabel="Year", ylabel="Mileage", legend=false)
+    plot!(years, linearFitM)
 
     # Plotting everything
     plot(pricePlot, milePlot, layout=grid(2,1), size=(650,800), legend=false)
+
+    print(mean(priceData))
+
 end
 
 function main()
