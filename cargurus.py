@@ -19,10 +19,10 @@ def scraper(link):
     for script in scripts:
         # Checks if the script tag has any contents
         if len(script.contents) <= 0:
-            continue 
+            continue
         # Grabs the text from the script tag
         text = script.contents[0]
-        # The script tag we're looking for is about 115,000 
+        # The script tag we're looking for is about 115,000
         # in size on a small query, so just filter out anything below a certain threshold
         if (len(text) > 50000):
             # Finds the location of the listings object
@@ -43,23 +43,24 @@ def scraper(link):
                     # Grabs the year
                     year = listing["carYear"]
                     # Grabs the make
-                    make = listing["makeName"]
+                    #make = listing["makeName"]
                     # Grabs the model
-                    model = listing["modelName"]
+                    #model = listing["modelName"]
                     # Creates a Year Make Model string
-                    ymm = formatUtil.createYMMString(year, make, model)
+                    #ymm = formatUtil.createYMMString(year, make, model)
                     # Grabs the price
-                    price = listing["expectedPriceString"].replace(",", "") or "No Price"
+                    price = listing["expectedPriceString"].replace(",", "").replace("$", "") or "No Price"
                     # Grabs the trim
-                    trim = listing["trimName"] or "Not Listed"
+                    # trim = listing["trimName"] or "Not Listed"
                     # Grabs the mileage
-                    miles = (listing["mileageString"] + " miles").replace(",", "") or "Not Listed"
+                    miles = (listing["mileageString"] + " miles").replace(",", "").replace(" miles", "") or "Not Listed"
                     # Grabs the location, have to append a couple entries to make this the same format as truecar
-                    location = formatUtil.createLocationString(listing["distance"], listing["sellerCity"].split(", ")[0])
+                    #location = formatUtil.createLocationString(listing["distance"], listing["sellerCity"].split(", ")[0])
                     # Grabs the color. Unfortunately CarGurus does not provide interior color.
-                    color = formatUtil.createColorString(listing["normalizedExteriorColor"], "Unknown")
+                    #color = formatUtil.createColorString(listing["normalizedExteriorColor"], "Unknown")
                     # Puts the data into CSV format
-                    csvString = (ymm + ", " + price + ", " + trim + ", " + miles + ", " + location + ", " + color)    
+                    #csvString = (ymm + ", " + price + ", " + trim + ", " + miles + ", " + location + ", " + color)
+                    csvString = (str(year) + "," + price + "," + miles)
                     # Finally writes the CSV data to the file
                     print(csvString)
                     file.write(csvString + "\n")

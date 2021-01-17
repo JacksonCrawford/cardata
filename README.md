@@ -32,5 +32,7 @@ The library and package names are included in the list below in the parentheses,
   - [BeatifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/) (BeautifulSoup4)
   - [lxml](https://lxml.de/) (lxml)
   - [requests](https://requests.readthedocs.io/en/master/) (requests)
+  - [selenium](https://pythonspot.com/selenium/) (selenium)
 - [Julia](https://www.julialang.org)
   - [Plots](http://docs.juliaplots.org/latest/) (Plots)
+- [GeckoDriver](https://github.com/mozilla/geckodriver/releases)
