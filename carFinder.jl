@@ -4,7 +4,7 @@ theme(:juno)
 line = 0
 
 function getData()
-    open("master.csv") do f
+    open("output/master.csv") do f
         data = ""
         while !eof(f)
             data = string(readline(f), ", ", data)
