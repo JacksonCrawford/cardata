@@ -45,3 +45,9 @@ def getZip(city, state):
     else:
         print("Something went wrong while retrieving ZIP Code for " + city + ", " + state + "!")
         return "0"
+
+def fileWipe(fileName):
+    # @param fileName - a string with the path and filename of a file (ex. "output/truecar.csv")
+    # Wipes a file
+    with open(fileName, "w") as f:
+        f.close()
