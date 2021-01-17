@@ -41,7 +41,7 @@ def scraper(url):
 if __name__ == "__main__":
     # Creates a config to grab info for the linker
     config = CarConfig()
-    # No idea what this is for ¯\_(ツ)_/¯
+    # Wipes the file
     with open("output/truecar.csv", "w") as f:
         f.close()
     # Loops through all of the links provided by the linker and scrapes each page
