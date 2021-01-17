@@ -23,6 +23,7 @@ function main()
     wipeFile()
     fileReader("truecar.csv")
     fileReader("cargurus.csv")
+    fileReader("edmunds.csv")
 end
 
 main()
