@@ -29,3 +29,19 @@ def createColorString(exteriorColor, interiorColor):
         return normalizedExterior + " exterior " + normalizedInterior + " interior"
     else:
         return "Not Listed"
+
+def getZip(city, state):
+    import requests
+    import json
+    # @param city - a string of the city where the car is located (ex. "Charlotte")
+    # @param state - a string of the state code where the car is located (ex. "NC")
+    # Starts by making a request to the Zippopotamus API
+    request = requests.get("http://api.zippopotam.us/us/" + state + "/" + city)
+    # Parses the returned request as a json
+    jsonResults = json.loads(request.text)
+    # Returns the first result in the list
+    if len(jsonResults['places']) > 0:
+        return jsonResults['places'][0]['post code']
+    else:
+        print("Something went wrong while retrieving ZIP Code for " + city + ", " + state + "!")
+        return "0"
