@@ -6,7 +6,7 @@ import linker
 def scraper(url):
     # Opens the CSV file for data storage
     # Uses w+ mode; will create the csv file if it doesn't exist
-    file = open("truecar.csv", "a")
+    file = open("output/truecar.csv", "a")
     # Instantiates a Config object
     config = CarConfig()
     # Creates a GET request to the trueCar link in the config
@@ -59,7 +59,11 @@ def scraper(url):
 
 # Main Method
 if __name__ == "__main__":
-    with open("truecar.csv", "w") as f:
+    # Creates a config to grab info for the linker
+    config = CarConfig()
+    # No idea what this is for ¯\_(ツ)_/¯
+    with open("output/truecar.csv", "w") as f:
         f.close()
-    for link in linker.truecar("toyota", "camry", "charlotte", "nc"):
+    # Loops through all of the links provided by the linker and scrapes each page
+    for link in linker.truecar(config.getMake(), config.getModel(), config.getCity(), config.getState()):
         scraper(link)
