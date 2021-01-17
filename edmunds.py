@@ -1,5 +1,8 @@
 from bs4 import BeautifulSoup
 import selenium.webdriver as webdriver
+import formatUtil
+import linker
+from config import CarConfig
 
 def getSource(url):
     driver = webdriver.Firefox()
@@ -8,36 +11,39 @@ def getSource(url):
     driver.close()
     return html
 
-def edmunds():
-    soup = BeautifulSoup(getSource("https://www.edmunds.com/inventory/srp.html?inventorytype=used%2Ccpo&make=porsche&model=911"), "lxml")
-    edmundSoup = soup.find("usurp-card-list list-unstyled align-items-stretch row")
+def scraper(fileName):
+    # Creates a CarConfig object for search criteria
+    config = CarConfig()
+    # Opens the CSV file for appending, will likely be wiped already
+    file = open(fileName, "a")
+    # Loops through each link provided by the linker and scrapes the site
+    for link in linker.edmunds(config.getMake(), config.getModel(), config.getCity(), config.getState()):
+        soup = BeautifulSoup(getSource(link), "lxml")
+        edmundSoup = soup.find("usurp-card-list list-unstyled align-items-stretch row")
+        cards = soup.find_all(class_="d-flex mb-0_75 mb-md-1_5 col-12 col-md-6")
+        for card in cards:
+            year = str(card.find(class_="card-title size-16 text-primary-darker font-weight-bold d-block mb-0_5").contents[0])
+            if "Certified" in year:
+                year = year[10::]
+            try:
+                price = str((card.find(class_="display-price font-weight-bold text-gray-darker")).contents[0].replace(",", ""))
+            except AttributeError:
+                price = "No Price"
+            try:
+                miles = str(card.find(class_="col-6").contents[1])
+                miles = miles.replace("class=\"size-14\">", "").replace("</span", "").replace(",", "").replace("<span ", "").replace(" miles>", "")
+            except AttributeError:
+                miles = "Not Listed"
 
-    outfile = open("output/edmunds.csv", "a")
-    cards = soup.find_all(class_="d-flex mb-0_75 mb-md-1_5 col-12 col-md-6")
-    for card in cards:
-        year = str(card.find(class_="card-title size-16 text-primary-darker font-weight-bold d-block mb-0_5").contents[0])
-        if "Certified" in year:
-            year = year[10::]
-        try:
-            price = str((card.find(class_="display-price font-weight-bold text-gray-darker")).contents[0].replace(",", ""))
-        except AttributeError:
-            price = "No Price"
-        try:
-            miles = str(card.find(class_="col-6").contents[1])
-            miles = miles.replace("class=\"size-14\">", "").replace("</span", "").replace(",", "").replace("<span ", "").replace(" miles>", "")
-        except AttributeError:
-            miles = "Not Listed"
-
-        data = year[0:4:] + "," + price + "," + miles
-
-        outfile.write(data)
-        outfile.write("\n")
-    outfile.close()
+            data = year[0:4:] + "," + price + "," + miles
+            print(data)
+            file.write(data)
+            file.write("\n")
+    file.close()
 
 
 if __name__ == "__main__":
     # Wipes the CSV file
-    with open("output/edmunds.csv", "w") as f:
-        f.close()
+    formatUtil.fileWipe("output/edmunds.csv")
     # Runs the scraper
-    edmunds()
+    scraper("output/edmunds.csv")
