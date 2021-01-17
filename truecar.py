@@ -33,7 +33,7 @@ def scraper(fileName):
             except AttributeError:
                 miles = "Not Listed"
 
-            print(year + "," + price + "," + miles)
+            # print(year + "," + price + "," + miles)
 
             data = year + "," + price + "," + miles
             file.write(data)

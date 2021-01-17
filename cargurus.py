@@ -65,7 +65,7 @@ def scraper(fileName):
                         #csvString = (ymm + ", " + price + ", " + trim + ", " + miles + ", " + location + ", " + color)
                         csvString = (str(year) + "," + price + "," + miles)
                         # Finally writes the CSV data to the file
-                        print(csvString)
+                        # print(csvString)
                         file.write(csvString + "\n")
     # Closes the csv file
     file.close()

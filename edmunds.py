@@ -36,7 +36,7 @@ def scraper(fileName):
                 miles = "Not Listed"
 
             data = year[0:4:] + "," + price + "," + miles
-            print(data)
+            # print(data)
             file.write(data)
             file.write("\n")
     file.close()
