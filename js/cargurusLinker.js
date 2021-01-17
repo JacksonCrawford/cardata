@@ -1,4 +1,4 @@
-/* FUNCTION DECLARATION*/
+/* FUNCTION DECLARATION */
 let setSelectFieldValue = (selectField, value) => {
     // Starts by creating an all uppercase version of the value for case-blind comparison
     let comparisonValue = value.toUpperCase()
