@@ -3,15 +3,14 @@ import json
 import formatUtil
 from bs4 import BeautifulSoup
 from config import CarConfig
+import linker
 
-def scraper():
+def scraper(link):
     # Opens the CSV file for data storage
     # Uses w+ mode; will create the csv file if it doesn't exist
-    file = open("cargurus.csv", "w+")
-    # Instantiates a Config object
-    config = CarConfig()
+    file = open("output/cargurus.csv", "a")
     # Creates a GET request to the carGurus link in the config
-    site = requests.get(config.getCarGurusLink())
+    site = requests.get(link)
     # Parses the website using lxml
     soup = BeautifulSoup(site.text, "lxml")
     # Grabs the script tags, we're looking for the "featuredListings" object somewhere in the React code
@@ -69,4 +68,8 @@ def scraper():
 
 
 if __name__ == '__main__':
-    scraper()
+    # Creates a config to grab info for the linker
+    config = CarConfig()
+    # Loops through all of the links provided by the linker and scrapes each page
+    for link in linker.cargurus(config.getMake(), config.getModel(), config.getCity(), config.getState()):
+        scraper(link)
