@@ -8,6 +8,8 @@ def scraper(fileName):
     # Opens the CSV file for data storage
     # Uses w+ mode; will create the csv file if it doesn't exist
     file = open(fileName, "a")
+    # Creates a config to grab info for the linker
+    config = CarConfig()
     # Instantiates a Config object
     config = CarConfig()
     for link in linker.truecar(config.getMake(), config.getModel(), config.getCity(), config.getState()):
@@ -42,8 +44,6 @@ def scraper(fileName):
 
 # Main Method
 if __name__ == "__main__":
-    # Creates a config to grab info for the linker
-    config = CarConfig()
     # Wipes the file
     formatUtil.fileWipe("output/truecar.csv")
     # Runs the scraper

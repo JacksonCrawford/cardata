@@ -6,6 +6,8 @@ from config import CarConfig
 import linker
 
 def scraper(fileName):
+    # Creates a config to grab info for the linker
+    config = CarConfig()
     # Opens the CSV file for data storage
     # Uses w+ mode; will create the csv file if it doesn't exist
     file = open(fileName, "a")
@@ -71,8 +73,6 @@ def scraper(fileName):
 
 
 if __name__ == '__main__':
-    # Creates a config to grab info for the linker
-    config = CarConfig()
     # Wipes the CSV file
     formatUtil.fileWipe("output/cargurus.csv")
     # Starts the scraper
