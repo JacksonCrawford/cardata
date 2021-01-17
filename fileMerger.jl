@@ -1,11 +1,11 @@
 function wipeFile()
-    open("master.csv", "w") do file
+    open("output/master.csv", "w") do file
     end
 end
 
 function fileReader(fileName)
     open(fileName) do infile
-        open("master.csv", "a") do outfile
+        open("output/master.csv", "a") do outfile
             line = 0
             data = ""
             while !eof(infile)
@@ -21,8 +21,8 @@ end
 
 function main()
     wipeFile()
-    fileReader("truecar.csv")
-    fileReader("cargurus.csv")
+    fileReader("output/truecar.csv")
+    fileReader("output/cargurus.csv")
 end
 
 main()
