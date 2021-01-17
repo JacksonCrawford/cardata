@@ -71,6 +71,9 @@ def scraper(link):
 if __name__ == '__main__':
     # Creates a config to grab info for the linker
     config = CarConfig()
+    # Wipes the CSV file
+    with open("output/cargurus.csv", "w") as f:
+        f.close()
     # Loops through all of the links provided by the linker and scrapes each page
     for link in linker.cargurus(config.getMake(), config.getModel(), config.getCity(), config.getState()):
         scraper(link)
