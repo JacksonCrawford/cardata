@@ -7,7 +7,7 @@ function getData()
     open("master.csv") do f
         data = ""
         while !eof(f)
-            data = string(readline(f), ", ", data)
+            data = string(readline(f), ",", data)
             global line += 1
         end
         return data
@@ -16,26 +16,24 @@ end
 
 function plotData()
     data = getData()
-    elements = line * 6
+    elements = line * 3
 
     years = []
     prices = []
     mileage = []
-    locations = []
-    cars = split(data, ", ")
+    cars = split(data, ",")
 
     # Creating an array of year/model
-    for a in 1:6:elements
+    for a in 1:3:elements
         year = cars[a]
-        push!(years, parse(Int64, year[1:4]))
+        push!(years, parse(Int64, year))
     end
 
     # Creating an array of prices
-    for b in 2:6:elements
-        #price = replace(cars[b], "," =>"")
+    for b in 2:3:elements
         price = cars[b]
         if price != "No Price"
-            price = parse(Int64, price[2:end])
+            price = parse(Int64, price)
         else
             price = 0
         end
@@ -43,28 +41,14 @@ function plotData()
     end
 
     # Creating an array of mileage
-    for d in 4:6:elements
+    for d in 3:3:elements
         miles = cars[d]
-        #miles = replace(cars[d], "," =>"")
         if miles != "Not Listed"
-            miles = replace(miles, " miles" =>"")
             miles = parse(Int64, miles)
         else
             miles = 0
         end
         push!(mileage, miles)
-    end
-
-    for e in 5:6:elements
-        location = cars[e]
-        locationDex = findfirst(" mi", location)
-        if location != "Not Listed"
-            location = location[1:locationDex[1]]
-            location = parse(Float64, location)
-        else
-            location = 0
-        end
-        push!(locations, location)
     end
 
     gr()
@@ -77,12 +61,8 @@ function plotData()
     milePlot = scatter(years, mileage, title="Mileage of Porsche 911's (TrueCar)",
         xlabel="Year", ylabel="Mileage", legend=false)
 
-    # Plotting Location
-    locPlot = scatter(years, locations, title="Location of Porsche 911's (TrueCar)",
-        xlabel="Year", ylabel="Miles from zip", legend=false)
-
     # Plotting everything
-    plot(pricePlot, milePlot, locPlot, layout=grid(3,1), size=(650,800), legend=false)
+    plot(pricePlot, milePlot, layout=grid(2,1), size=(650,800), legend=false)
 end
 
 function main()
