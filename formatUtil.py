@@ -1,4 +1,5 @@
 # Utility functions for formatting scraped car data
+from more_itertools import unique_everseen
 
 def createYMMString(year, make, model):
     # @param year - an integer for the year of the car (ex. 2021)
@@ -18,8 +19,8 @@ def createLocationString(distance, city):
         return "Not Listed"
 
 def createColorString(exteriorColor, interiorColor):
-    # @param exteriorColor - a string of a normalized exterior color (ex. "White") 
-    # @param interiorColor - a string of a normalized interior color (ex. "Black") 
+    # @param exteriorColor - a string of a normalized exterior color (ex. "White")
+    # @param interiorColor - a string of a normalized interior color (ex. "Black")
     if exteriorColor and interiorColor:
         # Normalizes the colors to have the first letter capitalized and the rest lowercase
         # Ex. Turns "WHITE" into "White"
@@ -45,6 +46,11 @@ def getZip(city, state):
     else:
         print("Something went wrong while retrieving ZIP Code for " + city + ", " + state + "!")
         return "0"
+
+def removeDupe(fileName):
+    # @param fileName - Name of file to be passed to 'master.csv' with duplicates removed
+    with open(fileName,'r') as f, open('output/master.csv','a') as out_file:
+        out_file.writelines(unique_everseen(f))
 
 def fileWipe(fileName):
     # @param fileName - a string with the path and filename of a file (ex. "output/truecar.csv")
