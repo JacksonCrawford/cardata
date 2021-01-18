@@ -103,7 +103,7 @@ def edmunds(make, model, city, state):
     # Grabs the max pages text
     maxPagesTextElement = driver.find_element_by_class_name("srp-pagination").find_element_by_class_name("text-nowrap")
     maxPagesTextSplit = maxPagesTextElement.text.split(" ")
-    maxEntries = int(maxPagesTextSplit[6])
+    maxEntries = int(maxPagesTextSplit[6].replace(",", ""))
     # Closes the driver
     driver.close()
     # Calculates the max pages using the maxEntries counter, edmunds displays 18 cars per page
