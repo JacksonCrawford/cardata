@@ -71,21 +71,12 @@ def cargurus(make, model, city, state):
 def edmunds(make, model, city, state):
     # Starts by instantiating the Selenium web driver
     driver = webdriver.Firefox()
-    # Opens the edmunds homepage with the driver
-    driver.get("https://www.edmunds.com/")
-    # Gets a random ZIP code with city and state because CarGurus only accepts ZIP for location
+    # Creates a pre-url with the make and model
+    preUrl = "https://www.edmunds.com/used-" + make + "-" + model + "/"
+    # Gets a ZIP code with city
     zipCode = getZip(city, state)
-    # Finds the Make Model search bar by class name
-    time.sleep(1)
-    makeModelSearchBar = driver.find_element_by_class_name("search-box")
-    makeModelSearchBar.send_keys(make + " " + model)
-    # Finds the "Used For Sale" button in the search bar
-    time.sleep(1)
-    usedForSaleButtons = driver.find_elements_by_class_name("value")
-    for button in usedForSaleButtons:
-        if button.text == "Used for Sale":
-            button.click()
-            break
+    # Opens the edmunds homepage with the driver
+    driver.get(preUrl)
     # Finds the ZIP code input box and inputs the zip code
     time.sleep(1)
     zipCodeInputDiv = driver.find_element_by_class_name("styled-zip-input")
@@ -115,7 +106,7 @@ def edmunds(make, model, city, state):
     # Creates the link list for the different pages
     linkList = [url]
     for num in range(2, pages + 1):
-        linkList.append(url + "?pagenumber=" + str(num))
+        linkList.append(url + "&pagenumber=" + str(num))
     # Returns the list for the scraper
     print("Done Creating URL For Edmunds!")
     return linkList
