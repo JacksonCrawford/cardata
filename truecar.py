@@ -10,8 +10,6 @@ def scraper(fileName):
     file = open(fileName, "a")
     # Creates a config to grab info for the linker
     config = CarConfig()
-    # Instantiates a Config object
-    config = CarConfig()
     for link in linker.truecar(config.getMake(), config.getModel(), config.getCity(), config.getState()):
         # Creates a GET request to the trueCar link in the config
         site = requests.get(link)
