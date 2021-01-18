@@ -1,5 +1,5 @@
-# carFinder
-Program for finding used cars across various sites and calculating price and condition data.
+# cardata
+Program for finding used cars across various sites and calculating price and mileage data.
 
 ## Project Overview
 ***
