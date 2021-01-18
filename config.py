@@ -30,17 +30,17 @@ class CarConfig:
 
     def getMake(self):
         # Get method for the link to Car Gurus
-        return self._make
+        return self._make.lower()
 
     def getModel(self):
         # Get method for the link to AutoTrader
-        return self._model
+        return self._model.lower()
 
     def getCity(self):
         # Get method for the link to cars.com
-        return self._city
+        return self._city.lower()
 
     def getState(self):
         # Get method for the link to TrueCar
-        return self._state
+        return self._state.lower()
 
