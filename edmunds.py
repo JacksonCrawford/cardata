@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import selenium.webdriver as webdriver
+import requests
 import formatUtil
 import linker
 from config import CarConfig
@@ -18,7 +18,11 @@ def scraper(fileName):
     file = open(fileName, "a")
     # Loops through each link provided by the linker and scrapes the site
     for link in linker.edmunds(config.getMake(), config.getModel(), config.getCity(), config.getState()):
-        soup = BeautifulSoup(getSource(link), "lxml")
+        # Makes a request to the edmunds site for the source code
+        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'}
+        site = requests.get("https://www.edmunds.com/used-toyota-camry/", headers=headers)
+        # Digests the source code using lxml and bs4
+        soup = BeautifulSoup(site.text, "lxml")
         edmundSoup = soup.find("usurp-card-list list-unstyled align-items-stretch row")
         cards = soup.find_all(class_="d-flex mb-0_75 mb-md-1_5 col-12 col-md-6")
         for card in cards:
