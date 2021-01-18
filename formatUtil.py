@@ -53,13 +53,14 @@ def getZip(city, state):
         out_file.writelines(unique_everseen(f))'''
 
 def removeDupe():
-    master = str()
+    master = None
     with open("output/master.csv", "r") as infile:
-        master = infile.read()
+        master = infile.read().split("\n")
         infile.close()
     with open("output/master.csv", "w") as outfile:
-        outfile.writelines(unique_everseen(master))
+        outfile.writelines("\n".join(list(unique_everseen(master))))
         outfile.close()
+    print("Done Duplicate Checking master.csv!")
 
 def fileWipe(fileName):
     # @param fileName - a string with the path and filename of a file (ex. "output/truecar.csv")

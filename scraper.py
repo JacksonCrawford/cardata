@@ -11,17 +11,10 @@ if __name__ == "__main__":
     # Wipes the file
     formatUtil.fileWipe(outputFilename)
     # Activates all the scrapers
-    '''truecar.scraper("output/truecar.csv")
-    formatUtil.removeDupe("output/truecar.csv")
-    cargurus.scraper("output/cargurus.csv")
-    formatUtil.removeDupe("output/cargurus.csv")
-    edmunds.scraper("output/edmunds.csv")
-    formatUtil.removeDupe("output/edmunds.csv")
-    autotrader.scraper("output/autotrader.csv")
-    formatUtil.removeDupe("output/autotrader.csv")'''
     truecar.scraper(outputFilename)
     cargurus.scraper(outputFilename)
     edmunds.scraper(outputFilename)
     autotrader.scraper(outputFilename)
+    # Checks for duplicate entries in the master.csv file
     formatUtil.removeDupe()
     print("Completely Finished!")
