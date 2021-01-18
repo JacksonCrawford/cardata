@@ -47,10 +47,19 @@ def getZip(city, state):
         print("Something went wrong while retrieving ZIP Code for " + city + ", " + state + "!")
         return "0"
 
-def removeDupe(fileName):
+'''def removeDupe(fileName):
     # @param fileName - Name of file to be passed to 'master.csv' with duplicates removed
     with open(fileName,'r') as f, open('output/master.csv','a') as out_file:
-        out_file.writelines(unique_everseen(f))
+        out_file.writelines(unique_everseen(f))'''
+
+def removeDupe():
+    master = str()
+    with open("output/master.csv", "r") as infile:
+        master = infile.read()
+        infile.close()
+    with open("output/master.csv", "w") as outfile:
+        outfile.writelines(unique_everseen(master))
+        outfile.close()
 
 def fileWipe(fileName):
     # @param fileName - a string with the path and filename of a file (ex. "output/truecar.csv")
