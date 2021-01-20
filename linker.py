@@ -2,6 +2,7 @@ import requests
 import lxml
 import time
 import math
+import json
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -69,44 +70,22 @@ def cargurus(make, model, city, state):
     return linkList
 
 def edmunds(make, model, city, state):
-    # Starts by instantiating the Selenium web driver
-    driver = webdriver.Firefox()
-    # Creates a pre-url with the make and model
-    preUrl = "https://www.edmunds.com/used-" + make + "-" + model + "/"
     # Gets a ZIP code with city
     zipCode = getZip(city, state)
-    # Opens the edmunds homepage with the driver
-    driver.get(preUrl)
-    # Finds the ZIP code input box and inputs the zip code
-    time.sleep(1)
-    zipCodeInputDiv = driver.find_element_by_class_name("styled-zip-input")
-    zipCodeInput = zipCodeInputDiv.find_element_by_tag_name("input")
-    # Clears the textbox
-    zipCodeInput.send_keys(Keys.CONTROL + "a")
-    zipCodeInput.send_keys(Keys.DELETE)
-    # Inputs the new zip into the textbox
-    zipCodeInput.send_keys(zipCode)
-    # Sends enter key to filter new results
-    zipCodeInput.send_keys(Keys.ENTER)
-    # Waits 2 seconds before grabbing the URL
-    time.sleep(2)
-    url = driver.current_url
-    # Grabs the max pages text
-    maxPagesTextElement = driver.find_element_by_class_name("srp-pagination").find_element_by_class_name("text-nowrap")
-    maxPagesTextSplit = maxPagesTextElement.text.split(" ")
-    maxEntries = int(maxPagesTextSplit[6].replace(",", ""))
-    # Closes the driver
-    driver.close()
-    # Calculates the max pages using the maxEntries counter, edmunds displays 18 cars per page
-    pages = None
-    if maxEntries > 18:
-        pages = math.ceil(maxEntries / 18)
-    else:
-        pages = 1
+    # Creates a url to the API with the make, model, and zip 
+    url = "https://www.edmunds.com/gateway/api/purchasefunnel/v1/srp/inventory?inventoryType=used%2Ccpo&make=" + make + "&model=" + "-".join(model.split(" ")) + "&zip=" + zipCode + "&pageSize=24"
+    # Makes a request to the API to grab pageSize
+    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'}
+    request = requests.get(url, headers=headers)
+    # Uses beautifulsoup to digest the source
+    soup = BeautifulSoup(request.text, "lxml")
+    # Grabs the max pages element out of the json data
+    jsonP = soup.contents[0].find("p")
+    maxPages = json.loads(jsonP.contents[0])['inventories']['totalPages']
     # Creates the link list for the different pages
     linkList = [url]
-    for num in range(2, pages + 1):
-        linkList.append(url + "&pagenumber=" + str(num))
+    for num in range(2, maxPages + 1):
+        linkList.append(url + "&pageNum=" + str(num))
     # Returns the list for the scraper
     print("Done Creating URL For Edmunds!")
     return linkList
@@ -131,4 +110,3 @@ def autotrader(make, model, city, state):
     # Finally returns the list
     print("Done Creating URL For AutoTrader!")
     return linkList
-
