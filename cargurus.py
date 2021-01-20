@@ -30,8 +30,11 @@ def scraper(fileName):
             if (len(text) > 50000):
                 # Finds the location of the listings object
                 startLocation = text.find('"featuredListings"') - 1
+                # Finds the locations of the listings object if featuredListings doesn't exist
+                if startLocation == -2:
+                    startLocation = text.find('"listings"') - 1
                 # Checks if it actually exists in this script tag
-                if startLocation:
+                if startLocation and startLocation != -2:
                     # Goes back one index to include the starting {
                     # Finds the end of the listings object using the start of the next line
                     endLocation = text.find("\n        window.__PREFLIGHT__", startLocation) - 1
@@ -46,9 +49,15 @@ def scraper(fileName):
                         # Grabs the year
                         year = listing["carYear"]
                         # Grabs the price
-                        price = listing["expectedPriceString"].replace(",", "").replace("$", "") or "No Price"
+                        try:
+                            price = listing["expectedPriceString"].replace(",", "").replace("$", "")
+                        except:
+                            continue
                         # Grabs the mileage
-                        miles = (listing["mileageString"] + " miles").replace(",", "").replace(" miles", "") or "Not Listed"
+                        try:   
+                            miles = (listing["mileageString"] + " miles").replace(",", "").replace(" miles", "")
+                        except:
+                            continue
                         # Puts the data into CSV format
                         csvString = (str(year) + "," + price + "," + miles)
                         # Finally writes the CSV data to the file
