@@ -16,6 +16,8 @@ The collection of programs work in unison in order to scrape used car sites, rep
 ### Requirements
 ***
 
+A number of these libraries and packages will likely come installed on most systems, but in order to ensure that you have all of them, it is easiest to try and install all of these.
+
 Python libraries can be easily installed by using pip:
 
 ```pip3 install [LibraryName]```
@@ -39,4 +41,6 @@ The library and package names are included in the list below in the parentheses,
   - [PlotlyJS](https://juliapackages.com/p/plotlyjs) (PlotlyJS)
   - [GLM](https://juliapackages.com/p/glm) (GLM)
   - [DataFrames](https://juliapackages.com/p/dataframes)
+  - [CSV](https://juliapackages.com/p/csv)
+  - [IniFile](https://juliapackages.com/p/inifile)
 - [GeckoDriver](https://github.com/mozilla/geckodriver/releases)
