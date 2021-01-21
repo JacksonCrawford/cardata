@@ -35,12 +35,28 @@ The library and package names are included in the list below in the parentheses,
   - [lxml](https://lxml.de/) (lxml)
   - [requests](https://requests.readthedocs.io/en/master/) (requests)
   - [selenium](https://pythonspot.com/selenium/) (selenium)
-  - [more-itertools](https://pypi.org/project/more-itertools/)
+  - [more-itertools](https://pypi.org/project/more-itertools/) (more-itertools)
 - [Julia](https://www.julialang.org)
   - [Plots](http://docs.juliaplots.org/latest/) (Plots)
   - [PlotlyJS](https://juliapackages.com/p/plotlyjs) (PlotlyJS)
   - [GLM](https://juliapackages.com/p/glm) (GLM)
-  - [DataFrames](https://juliapackages.com/p/dataframes)
-  - [CSV](https://juliapackages.com/p/csv)
-  - [IniFile](https://juliapackages.com/p/inifile)
+  - [DataFrames](https://juliapackages.com/p/dataframes) (DataFrames)
+  - [CSV](https://juliapackages.com/p/csv) (CSV)
+  - [IniFile](https://juliapackages.com/p/inifile) (IniFile)
 - [GeckoDriver](https://github.com/mozilla/geckodriver/releases)
+
+
+### Usage
+***
+
+This tool requires two programs to be run; one to scrape used car sites, and another to interpret and plot the data. In order to run the scraping program, you should run it like any other python program, meaning navigate to the program's location (folder) through your terminal by using cd (change directory), and then typing ```python3 scraper.py```
+
+Once you do this, you will be prompted to enter a make, model, city, and state. Once you have done that, the scraping process will begin! The terminal will update you as it works through sites, but keep in mind that more popular cars will take longer to scrape as there are more of them.
+
+After the program has finished running, you should then find your way to whichever IDE you use to run Julia. You do not always need an IDE to use Julia, but for the plots that we will be using to render it is easiest this way. The uber-juno package on Atom is generally the most robust one, but VSCode also offers a popular package. Once you have the program pulled up in your IDE, simply run it and you should see the plots!
+
+Below are examples of this process:
+
+![Terminal Example](examples/terminal.png)
+![Atom Example](examples/atom.png)
+![911](examples/911.png)
