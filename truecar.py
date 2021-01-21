@@ -23,16 +23,14 @@ def scraper(fileName):
             try:
                 price = (card.find(class_="heading-3 margin-y-1 font-weight-bold")).contents[0].replace(",", "").replace("$", "")
             except AttributeError:
-                price = "No Price"
+                continue
             try:
                 miles = str(card.find(class_="d-flex w-100 justify-content-between").contents[0])
                 miles = miles[miles.find("</svg>") + 6:miles.find("</div>"):]
                 miles = miles.replace("<!-- -->", "").replace(",", "").replace(" miles", "")
             except AttributeError:
-                miles = "Not Listed"
-
-            # print(year + "," + price + "," + miles)
-
+                continue
+            # Puts the data into CSV format and writes it
             data = year + "," + price + "," + miles
             file.write(data)
             file.write("\n")

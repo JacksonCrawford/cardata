@@ -31,14 +31,14 @@ def scraper(fileName):
                 else:
                     price = price.find(class_="text-bold").contents[0].replace(",", "")
             except AttributeError:
-                price = "No Price"
+                continue
             # Finds the mileage of the car
             try:
                 miles = card.find(class_="item-card-specifications")
                 miles = miles.find("div")
                 miles = miles.contents[0].replace(" miles", "").replace(",", "")
             except AttributeError:
-                miles = "Not Listed"
+                continue
             # Formats the data into CSV format and writes it to the file
             data = year + "," + price + "," + miles
             file.write(data)
