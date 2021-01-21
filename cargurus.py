@@ -34,7 +34,7 @@ def scraper(fileName):
                 if startLocation == -2:
                     startLocation = text.find('"listings"') - 1
                 # Checks if it actually exists in this script tag
-                if startLocation and startLocation != -2:
+                if startLocation != -2:
                     # Goes back one index to include the starting {
                     # Finds the end of the listings object using the start of the next line
                     endLocation = text.find("\n        window.__PREFLIGHT__", startLocation) - 1
