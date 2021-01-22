@@ -14,6 +14,8 @@ if __name__ == "__main__":
     outputFilename = "output/master.csv"
     # Wipes the file
     formatUtil.fileWipe(outputFilename)
+    # Adds headers
+    formatUtil.addHeaders(outputFilename)
     # Activates all the scrapers
     truecar.scraper(outputFilename)
     cargurus.scraper(outputFilename)
