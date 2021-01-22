@@ -42,7 +42,7 @@ class CarConfig:
         print("Car Model (ex. Camry): ", end="")
         model = input()
         if (len(model) == 0):
-            make = self.getModel()
+            model = self.getModel()
         # Grabs the city or uses the current city if nothing is inputted
         print("City (ex. Charlotte): ", end="")
         city = input()
