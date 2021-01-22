@@ -1,9 +1,10 @@
 import formatUtil
+import config
 import truecar
 import cargurus
 import edmunds
 import autotrader
-import config
+import carsdotcom
 
 # Runs all of the scrapers into master.csv
 if __name__ == "__main__":
@@ -18,6 +19,7 @@ if __name__ == "__main__":
     cargurus.scraper(outputFilename)
     edmunds.scraper(outputFilename)
     autotrader.scraper(outputFilename)
+    carsdotcom.scraper(outputFilename)
     # Checks for duplicate entries in the master.csv file
     formatUtil.removeDupe()
     print("Completely Finished!")
