@@ -67,3 +67,11 @@ def fileWipe(fileName):
     # Wipes a file
     with open(fileName, "w") as f:
         f.close()
+
+def firstLetterCapitals(string):
+    # @param string - input string that will have first letter capitalized
+    splitString = string.split(" ")
+    capitalizedSplitString = []
+    for split in splitString:
+        capitalizedSplitString.append(split[0].upper() + split[1:].lower())
+    return " ".join(capitalizedSplitString)
