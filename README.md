@@ -11,7 +11,6 @@ The collection of programs work in unison in order to scrape used car sites, rep
 - [Cars.com](https://www.cars.com/)
 - [TrueCar](https://www.truecar.com/)
 - [Edmunds](https://www.edmunds.com/)
-- [CarsDirect](https://www.carsdirect.com/)
 
 ### Requirements
 ***
