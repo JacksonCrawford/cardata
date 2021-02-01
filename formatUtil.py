@@ -1,5 +1,6 @@
 # Utility functions for formatting scraped car data
 from more_itertools import unique_everseen
+from pathlib import Path
 
 def createYMMString(year, make, model):
     # @param year - an integer for the year of the car (ex. 2021)
@@ -52,12 +53,12 @@ def addHeaders(fileName):
         headFile.write("year,price,mileage\n")
         headFile.close()
 
-def removeDupe():
+def removeDupe(fileName):
     master = None
-    with open("output/master.csv", "r") as infile:
+    with open(fileName, "r") as infile:
         master = infile.read().split("\n")
         infile.close()
-    with open("output/master.csv", "w") as outfile:
+    with open(fileName, "w") as outfile:
         outfile.writelines("\n".join(list(unique_everseen(master))))
         outfile.close()
     print("Done Duplicate Checking master.csv!")

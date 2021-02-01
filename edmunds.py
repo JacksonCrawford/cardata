@@ -3,6 +3,7 @@ import formatUtil
 import linker
 import json
 from config import CarConfig
+from pathlib import Path
 
 def scraper(fileName):
     # Creates a CarConfig object for search criteria
@@ -47,7 +48,9 @@ def scraper(fileName):
     print ("Done Scraping Edmunds!")
 
 if __name__ == "__main__":
+    # Creates a path to the CSV file
+    path = Path("output/edmunds.csv")
     # Wipes the CSV file
-    formatUtil.fileWipe("output/edmunds.csv")
+    formatUtil.fileWipe(path)
     # Runs the scraper
-    scraper("output/edmunds.csv")
+    scraper(path)

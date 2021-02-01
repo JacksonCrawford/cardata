@@ -40,7 +40,9 @@ def scraper(fileName):
 
 # Main Method
 if __name__ == "__main__":
+    # Creates a path
+    path = Path("output/truecar.csv")
     # Wipes the file
-    formatUtil.fileWipe("output/truecar.csv")
+    formatUtil.fileWipe(path)
     # Runs the scraper
-    scraper("output/truecar.csv")
+    scraper(path)

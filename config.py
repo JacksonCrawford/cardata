@@ -7,22 +7,23 @@
 # ___\_/________\_/______
 import configparser
 import os
-
+from pathlib import Path
 
 class CarConfig:
 
     def __init__(self):
         # Opens the config file or creates it if it doesn't exist
         self.config = configparser.ConfigParser()
-        if not os.path.exists('config.ini'):
+        self.configPath = Path('config.ini')
+        if not os.path.exists(self.configPath ):
             self.config['Search Criteria'] = {'make': '', 'model': '',
                                               'city': '', 'stateCode': ''}
-            with open('config.ini', 'w+') as configfile:
+            with open(self.configPath , 'w+') as configfile:
                 self.config.write(configfile)
             print("Please fill out the config file and restart the application!")
             exit()
         # Reads the config file for their values
-        self.config.read('config.ini')
+        self.config.read(self.configPath)
         # Stores read values into instance variables
         self._make = self.config['Search Criteria']['make']
         self._model = self.config['Search Criteria']['model']
@@ -58,7 +59,7 @@ class CarConfig:
         self.config['Search Criteria'] = {'make': make, 'model': model,
                                           'city': city, 'stateCode': state}
         # Writes the values to the config file
-        with open('config.ini', 'w+') as configFile:
+        with open(self.configPath, 'w+') as configFile:
             self.config.write(configFile)
 
     def getMake(self):

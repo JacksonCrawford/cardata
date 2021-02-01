@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup, NavigableString
 from config import CarConfig
 import linker
 import formatUtil
+from pathlib import Path
 
 def scraper(fileName):
     # Opens the CSV file for data storage
@@ -49,7 +50,9 @@ def scraper(fileName):
 
 # Main Method
 if __name__ == "__main__":
+    # Creates a file path
+    path = Path("output/autotrader.csv")
     # Wipes the file
-    formatUtil.fileWipe("output/autotrader.csv")
+    formatUtil.fileWipe(path)
     # Runs the scraper
-    scraper("output/autotrader.csv")
+    scraper(path)

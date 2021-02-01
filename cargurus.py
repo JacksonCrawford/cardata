@@ -4,6 +4,7 @@ import formatUtil
 from bs4 import BeautifulSoup
 from config import CarConfig
 import linker
+from pathlib import Path
 
 def scraper(fileName):
     # Creates a config to grab info for the linker
@@ -69,7 +70,9 @@ def scraper(fileName):
 
 
 if __name__ == '__main__':
+    # Creates a file path
+    path = Path("output/cargurus.csv")
     # Wipes the CSV file
-    formatUtil.fileWipe("output/cargurus.csv")
+    formatUtil.fileWipe(path)
     # Starts the scraper
-    scraper("output/cargurus.csv")
+    scraper(path)
