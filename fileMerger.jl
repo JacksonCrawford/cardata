@@ -1,3 +1,5 @@
+#  DEPRACATED, DO NOT USE
+
 function wipeFile()
     open("output/master.csv", "w") do file
     end
