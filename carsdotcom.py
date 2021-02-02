@@ -34,7 +34,7 @@ def scraper(fileName):
             # Parses mileage
             try:
                 miles = str(result["mileage"])
-                if miles == None:
+                if miles == "None":
                     miles = "0"
             except Exception:
                 continue
