@@ -34,6 +34,8 @@ def scraper(fileName):
             # Parses mileage
             try:
                 miles = str(result["mileage"])
+                if miles == None:
+                    miles = "0"
             except Exception:
                 continue
             # Puts data into CSV format
