@@ -58,4 +58,4 @@ After the program has finished running, you should then find your way to whichev
 
 Below is an example of the output:
 
-![911](examples/911.png)
+![911](examples/new911.png)
