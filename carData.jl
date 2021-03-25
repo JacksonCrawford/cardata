@@ -76,7 +76,7 @@ function plotData()
     plot!(prices, linearFitR)
 
     # Plotting everything
-    plot(pricePlot, milePlot, ratioPlot, layout=grid(3,1), size=(650,800), legend=true)
+    plot(pricePlot, milePlot, ratioPlot, layout=grid(3,1), size=(675,950), legend=false)
 end
 
 # Main function
