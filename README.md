@@ -56,8 +56,6 @@ Once you do this, you will be prompted to enter a make, model, city, and state. 
 
 After the program has finished running, you should then find your way to whichever IDE you use to run Julia. You do not always need an IDE to use Julia, but for the plots that we will be using to render it is easiest this way. The uber-juno package on Atom is generally the most robust one, but VSCode also offers a popular package. Once you have the program pulled up in your IDE, simply run it and you should see the plots!
 
-Below are examples of this process:
+Below is an example of the output:
 
-![Terminal Example](examples/terminal.png)
-![Atom Example](examples/atom.png)
-![911](examples/911.png)
+![911](examples/new911.png)
