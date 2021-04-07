@@ -13,7 +13,7 @@ def scraper(fileName):
     # Loops through each link provided by the linker and scrapes the site
     for link in linker.edmunds(config.getMake(), config.getModel(), config.getCity(), config.getState()):
         # Makes a request to the edmunds site for the source code
-        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'}
+        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36', 'referer': 'https://www.edmunds.com/'}
         site = requests.get(link, headers=headers)
         # Converts the data to JSON for easy digestion
         jsonData = json.loads(site.text)

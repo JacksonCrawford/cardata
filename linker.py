@@ -82,6 +82,7 @@ def edmunds(make, model, city, state):
     # Gets a ZIP code with city
     zipCode = getZip(city, state)
     # Creates a url to the API with the make, model, and zip 
+    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36', 'referer': 'https://www.edmunds.com/'}
     url = "https://www.edmunds.com/gateway/api/purchasefunnel/v1/srp/inventory?inventoryType=used%2Ccpo&make=" + make + "&model=" + "-".join(model.split(" ")) + "&zip=" + zipCode + "&pageSize=24"
     # Makes a request to the API to grab pageSize
     request = requests.get(url, headers=headers)
